@@ -1,0 +1,63 @@
+<%- include('../partials/header') %>
+
+<div class="breadcrumb">
+    <a href="/">Categories</a> /
+    <a href="/categories/<%= item.category_id %>"><%= item.category_name %></a> /
+    <span><%= item.name %></span>
+</div>
+
+<section class="item-detail">
+    <div class="item-detail-img">
+        <% if (item.image_url) { %>
+            <img src="<%= item.image_url %>" alt="<%= item.name %>">
+        <% } else { %>
+            <div class="img-placeholder-lg">👗</div>
+        <% } %>
+    </div>
+
+    <div class="item-detail-info">
+        <p class="item-category-tag">
+            <a href="/categories/<%= item.category_id %>"><%= item.category_name %></a>
+        </p>
+        <h1><%= item.name %></h1>
+        <p class="item-detail-price">$<%= parseFloat(item.price).toFixed(2) %></p>
+
+        <div class="item-attrs">
+            <% if (item.color) { %>
+                <div class="attr">
+                    <span class="attr-label">Color</span>
+                    <span class="attr-val"><%= item.color %></span>
+                </div>
+            <% } %>
+            <% if (item.size) { %>
+                <div class="attr">
+                    <span class="attr-label">Size</span>
+                    <span class="attr-val"><%= item.size %></span>
+                </div>
+            <% } %>
+            <div class="attr">
+                <span class="attr-label">Stock</span>
+                <span class="attr-val stock-<%= item.stock_quantity === 0 ? 'out' : item.stock_quantity < 5 ? 'low' : 'ok' %>">
+                    <%= item.stock_quantity === 0 ? 'Out of stock' : `${item.stock_quantity} units` %>
+                </span>
+            </div>
+        </div>
+
+        <% if (item.description) { %>
+            <p class="item-detail-desc"><%= item.description %></p>
+        <% } %>
+
+        <div class="item-detail-actions">
+            <a href="/items/<%= item.id %>/edit" class="btn">Edit Item</a>
+            <button onclick="openDeleteModal()" class="btn btn-danger-outline">Delete Item</button>
+        </div>
+    </div>
+</section>
+
+<%- include('../partials/deleteModal', {
+    deleteMessage: `Are you sure you want to delete "${item.name}"? This action cannot be undone.`,
+    deleteAction: `/items/${item.id}/delete`,
+    deleteError: typeof deleteError !== 'undefined' ? deleteError : null 
+}) %>
+
+<%- include('../partials/footer') %>

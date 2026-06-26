@@ -1,0 +1,70 @@
+<%- include('../partials/header') %>
+
+<div class="breadcrumb">
+    <a href="/">Categories</a> / <span><%= category.name %></span>
+</div>
+
+<section class="category-hero">
+    <% if (category.image_url) { %>
+        <div class="category-hero-img">
+            <img src="<%= category.image_url %>" alt="<%= category.name %>">
+        </div>
+    <% } %>
+    <div class="category-hero-text">
+        <h1><%= category.name %></h1>
+        <% if (category.description) { %>
+            <p><%= category.description %></p>
+        <% } %>
+        <div class="category-actions">
+            <a href="/items/new?category_id=<%= category.id %>" class="btn">+ Add Item</a>
+            <a href="/categories/<%= category.id %>/edit" class="btn btn-outline">Edit Category</a>
+            <button onclick="openDeleteModal()" class="btn btn-danger-outline">Delete Category</button>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-header">
+        <h2>Items <span class="badge"><%= items.length %></span></h2>
+    </div>
+
+    <% if (items.length === 0) { %>
+        <div class="empty-state">
+            <p>No items in this category yet.</p>
+            <a href="/items/new?category_id=<%= category.id %>" class="btn">Add the first item</a>
+        </div>
+    <% } else { %>
+        <div class="item-grid">
+            <% items.forEach(item => { %>
+                <a href="/items/<%= item.id %>" class="item-card">
+                    <div class="item-img-wrap">
+                        <% if (item.image_url) { %>
+                            <img src="<%= item.image_url %>" alt="<%= item.name %>">
+                        <% } else { %>
+                            <div class="img-placeholder">👗</div>
+                        <% } %>
+                        <span class="stock-badge <%= item.stock_quantity === 0 ? 'out' : item.stock_quantity < 5 ? 'low' : 'ok' %>">
+                            <%= item.stock_quantity === 0 ? 'Out of stock' : `${item.stock_quantity} in stock` %>
+                        </span>
+                    </div>
+                    <div class="item-card-body">
+                        <h3><% item.name %></h3>
+                        <div class="item-meta">
+                            <% if (item.color) { %><span class="tag">🎨 <%= item.color %></span><% } %>
+                            <% if (item.size) { %><span class="tag">📐 <%= item.size %></span><% } %>
+                        </div>
+                        <p class="item-price">$<%= parseFloat(item.price).toFixed(2) %></p>
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    <% } %>
+</section>
+
+<%- include('../partials/deleteModal', {
+    deleteMessage: `Are you sure you want to delete the "${category.name}" category? This cannot be undone.`,
+    deleteAction: `/categories/${category.id}/delete`,
+    deleteError: typeof deleteError !== 'undefined' ? deleteError : null
+}) %>
+
+<%- include('../partials/footer') %>

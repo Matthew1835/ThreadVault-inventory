@@ -1,0 +1,91 @@
+<%- include('../partials/header') %>
+
+<div class="breadcrumb">
+    <a href="/">Categories</a> / <span><%= title %></span>
+</div>
+
+<section class="form-section">
+    <h1><%= title %></h1>
+
+    <% if (errors.length > 0) { %>
+        <div class="error-box">
+            <ul>
+                <% errors.forEach(e => { %>
+                    <li><%= e.msg %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+
+    <form action="<%= action %>" method="POST" class="form-card">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="name">Item Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" value="<% item.name || '' %>"
+                    placeholder="e.g. Slim Fit Chinos" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category-id">Category <span class="required">*</span></label>
+                <select name="category_id" id="category_id" required>
+                    <option value="">Select a category</option>
+                    <% categories.forEach(cat => { %>
+                        <option value="<%= cat.id %>" <%= String(item.category_id) === String(cat.id) ? 'selected' : '' %>>
+                            <%= cat.name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" rows="3" placeholder="Describe the item...">
+                <%= item.description || '' %>
+            </textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="price">Price ($) <span class="required">*</span></label>
+                <input type="number" id="price" name="price" value="<%= item.price || '' %>" 
+                    step="0.01" min="0" placeholder="0.00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stock_quantity">Stock Quantity <span class="required">*</span></label>
+                <input type="number" id="stock_quantity" name="stock_quantity"
+                    value="<%= item.stock_quantity !== undefined ? item.stock_quantity : '' %>"
+                    min="0" placeholder="0" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="size">Size</label>
+                <input type="text" id="size" name="size" value="<%= item.size || '' %>"
+                    placeholder="e.g. M, L, XL, 42, One Size">
+            </div>
+
+            <div class="form-group">
+                <label for="color">Color</label>
+                <input type="text" id="color" name="color" value="<%= item.color || '' %>"
+                    placeholder="e.g. Navy Blue">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="image_url">Image URL</label>
+            <input type="url" id="image_url" name="image_url" 
+                value="<%= item.image_url || '' %>" placeholder="https://...">
+            <small>Paste a direct image link (Unsplash, etc.)</small>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn">Save Item</button>
+            <a href="/" class="btn btn-outline">Cancel</a>
+        </div>
+    </form>
+</section>
+
+<%- include('../partials/footer') %>

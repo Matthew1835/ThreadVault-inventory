@@ -1,0 +1,35 @@
+<!-- Delete Modal -->
+<div class="modal-overlay" id="deleteModal">
+    <div class="modal">
+        <h3>Confirm Delete</h3>
+        <p class="modal-body"><%= deleteMessage %></p>
+        <% if (typeof deleteError !== 'undefined' && deleteError) { %>
+            <p class="error-msg"><%= deleteError %></p>
+        <% } %>
+        <form action="<%= deleteAction %>" method="POST">
+            <div class="form-group">
+                <label for="adminPassword">Admin Password</label>
+                <input type="password" id="adminPassword" name="adminPassword" 
+                    placeholder="Enter admin password" required> 
+            </div>
+            <div class="modal-actions">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openDeleteModal() {
+        document.getElementById('deleteModal').classList.add('active');
+    }
+    function closeModal() {
+        document.getElementById('deleteModal').classList.remove('active');
+    }
+
+    // Auto-open if there was a password error
+    <% if (typeof deleteError !== 'undefined' && deleteError) { %>
+        openDeleteModal();
+    <% } %>
+</script>

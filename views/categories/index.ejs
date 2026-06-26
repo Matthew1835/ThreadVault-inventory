@@ -1,0 +1,50 @@
+<%- include('../partials/header') %>
+
+<section class="hero">
+    <div class="hero-text">
+        <p class="hero-eyebrow">Stock Control</p>
+        <h1>ThreadVault</h1>
+        <p class="hero-sub">
+            Manage your clothing store industry - categories, items, stock levels, and more.
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-header">
+        <h2>Categories</h2>
+        <a href="/categories/new" class="btn">+ New Category</a>
+    </div>
+
+    <% if (categories.length === 0) { %>
+        <div class="empty-state">
+            <p>No categories yet.</p>
+            <a href="/categories/new" class="btn">Create your first category</a>
+        </div>
+    <% } else { %>
+        <div class="card-grid">
+            <% categories.forEach(cat => { %>
+                <a href="/categories/<%= cat.id %>" class="category-card">
+                    <div class="category-img-wrap">
+                        <% if (cat.image_url) { %>
+                            <img src="<%= cat.image_url %>" alt="<%= cat.name %>">
+                        <% } else { %>
+                            <div class="img-placeholder">🧥</div>
+                        <% } %>
+                    </div>
+                    <div class="category-card-body">
+                        <h3><%= cat.name %></h3>
+                        <p class="item-count">
+                            <%= cat.item_count %> item<% cat.item_count !== 1 ? 's' : '' %>
+                        </p>
+                        <% if (cat.description) { %>
+                            <p class="category-desc"><%= cat.description %></p>
+                        <% } %>
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    <% } %>
+</section>
+
+<%- include('../partials/footer') %>
