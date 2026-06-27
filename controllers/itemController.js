@@ -52,8 +52,6 @@ const itemController = {
             const item = await itemDb.getById(req.params.id);
             
             if (!item) return res.status(404).render("404", { title: "Not Found" });
-
-            console.log(item)
             
             res.render("items/show", {
                 title: item.name,
