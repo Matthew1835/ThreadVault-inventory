@@ -4,6 +4,7 @@ A full-stack inventory management app built with Express, EJS, and PostgreSQL.
 
 ![Project Screenshot](./screenshots/preview.png)
 
+[![Live Demo](https://threadvault-inventory.onrender.com)
 [![GitHub](https://img.shields.io/badge/GitHub-Repo-blue)](https://github.com/Matthew1835/ThreadVault-inventory)
 
 ---
