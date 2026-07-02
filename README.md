@@ -4,7 +4,7 @@ A full-stack inventory management app built with Express, EJS, and PostgreSQL.
 
 ![Project Screenshot](./screenshots/preview.png)
 
-[![Live Demo](https://threadvault-inventory.onrender.com)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://threadvault-inventory.onrender.com)
 [![GitHub](https://img.shields.io/badge/GitHub-Repo-blue)](https://github.com/Matthew1835/ThreadVault-inventory)
 
 ---
@@ -15,11 +15,10 @@ A full-stack inventory management app built with Express, EJS, and PostgreSQL.
 - [Pages](#pages)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
+- [Installation](#installation)
 - [Deployment](#deployment)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
-- [What I Learned](#what-i-learned)
 - [Project Structure](#project-structure)
 - [Additional Features](#additional-features)
 - [Contact](#contact)
@@ -56,30 +55,20 @@ A full-stack inventory management app built with Express, EJS, and PostgreSQL.
 
 ## Tech Stack
 
-- Node.js + Express
-- PostgreSQL
-- EJS
-- CSS
+- **Frontend:** HTML, CSS, JavaScript, EJS
+- **Backend:** Node.js, Express.js
+- **Database:** PostgreSQL
+- **Validation** express-validator
+- **Environment:** dotenv
+- **Development Tools:** Git, GitHub, npm, VS Code
 
 ---
 
-## Getting Started
-
-Follow these steps to run the project locally on your machine.
-
-### Prerequisites
-
-Make sure you have these installed:
-- [Node.js](https://nodejs.org/) v18 or higher
-- [npm](https://www.npmjs.com/) (comes with Node)
-- [PostgreSQL](https://www.postgresql.org/) v14 or higher running locally
-- A GitHub account (for deployment)
-
-### Installation
+## Installation
 
 1. Clone & install
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Matthew1835/ThreadVault-inventory
    cd clothing-inventory
    npm install
    ```
@@ -183,13 +172,13 @@ Visit: http://localhost:3000
 ## Project Structure
 ```
 clothing-inventory/
-├── app.js              # Express entry point
+├── app.js
 ├── db/
-│   ├── pool.js         # PostgreSQL connection pool
-│   ├── init.js         # Table creation script
-│   ├── seed.js         # Dummy data seeder
-│   ├── categoryDb.js   # Category queries
-│   └── itemDb.js       # Item queries
+│   ├── pool.js
+│   ├── init.js
+│   ├── seed.js
+│   ├── categoryDb.js
+│   └── itemDb.js
 ├── controllers/
 │   ├── categoryController.js
 │   ├── itemController.js
@@ -198,9 +187,9 @@ clothing-inventory/
 │   ├── categories.js
 │   └── items.js
 ├── views/
-│   ├── partials/       # header, footer, deleteModal
-│   ├── categories/     # index, show, form
-│   └── items/          # show, form
+│   ├── partials/
+│   ├── categories/
+│   └── items/
 └── public/css/style.css
 ```
 
@@ -218,17 +207,6 @@ All destructive actions (delete category, delete item) require entering the `ADM
 - **Deleting an item** → permanently removes the item and redirects to its parent category.
 
 ![Prevent Delete](./screenshots/prevent_delete.png)
-
----
-
-## What I Learned
-
-- Structuring a full-stack MVC app from scratch
-- Working with PostgreSQL using raw SQL
-- Relational data and foreign key constraints
-- Reusing EJS templates
-- Environment variable and deploying config
-- Basic security without a full auth system
 
 ---
 
